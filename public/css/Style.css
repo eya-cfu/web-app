@@ -1,0 +1,340 @@
+#login{
+
+    background: url("../pics/BackLogin.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+#acceuil{
+
+    background-color: #EDF1F7 ;
+}
+
+.origin{
+    text-align: center;
+}
+
+
+.UserPic{
+    margin-top: -5em;
+    opacity: 0.95;
+}
+
+.fa-user-tie{
+    color: gray;
+}
+.fa-user-tie:hover{
+   color: #333333;
+}
+
+.link:hover{
+    text-decoration: underline;
+}
+
+
+.maPainInTheS{
+    position: relative;
+    display: inline-block;
+}
+
+/*the block coming next is reserved for authentification update*/
+
+/*
+.maPainInTheS:hover:before{
+    content: attr(alt);
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    position: absolute;
+    padding: 1em;
+    z-index: 99;
+    left: -15em;
+    top: 1.5em;
+    color: #333333;
+    font-weight: bold;
+    width: 15em;
+    background-color:ghostwhite;
+
+}*/
+
+.loginbox{
+
+    background-color: rgba(255,255,255,0.85);
+    box-shadow: 0px 2px 4px grey;
+    vertical-align: center;
+}
+
+.my-form{
+    margin-left: 1.5em;
+    margin-right: 1.5em ;
+}
+
+.submitButt{
+    background-color: #050F4F ;
+    color:white ;
+    border-radius: 8px;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    margin-bottom: 1em;
+}
+
+.submitButt:hover{
+   background-color: black;
+}
+
+.submitnt{
+
+    color:white ;
+    border-radius: 8px;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    margin-bottom: 1em;
+}
+.row{
+  /* border: 2px black dashed;*/
+}
+.icon{
+    opacity: 0.5;
+    margin: 1em;
+
+}
+
+.mainDiv{
+    /*  border: 2px violet solid;*/
+    margin-top: 8em;
+    margin-bottom: 6em ;
+
+}
+
+.my-col{
+    border: 2px tomato dashed;
+}
+.arrow{
+
+
+    opacity: 0.5;
+    position: absolute;
+    right: 20px;
+    top:39px;
+
+
+}
+hr{
+    margin: auto 0px;
+}
+
+
+a:hover{
+    text-decoration: none;
+}
+
+
+ul{
+    width:280px;
+    margin-left: 0px;
+
+
+}
+
+li ul hr{
+    width: 80%;
+    margin : 1em auto;
+
+}
+.greenyThing{
+    display: flex;
+    margin: auto  0.5em;
+    background-color: #0FF77A;
+    width: 4.5em;
+    height: 80%;
+    border-radius: 10px;
+
+
+}
+
+.greenyThing:hover,.greenyThing:focus{
+
+    background-color: #35E38A;
+}
+
+
+.component{
+
+    width:100%;
+    position: relative;
+    padding: 1em 0em;
+
+}
+
+.component a,.OpA{
+    color:#333333;
+}
+
+a:hover{
+    color:#007bff;
+}
+
+.OpA{
+    margin-left: 3em;
+    display: inline;
+}
+
+.wrapper{
+    display: flex;
+    min-height: 90%;
+
+}
+
+.my-row{
+    border: 2px black dashed;
+
+
+}
+
+.sideBar{
+
+   position: relative;
+    z-index: 1;
+    font-family: Arial,sans-serif;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 2em;
+    min-height:fit-content;
+    width: 280px;
+    background-color: white;
+    box-shadow: 8px 0px 10px #E8E3E3;
+    padding-left: 0px;
+}
+
+.sidebarShrink{
+    min-height: fit-content;
+    padding: 2em;
+    width: 60px;
+    background-color:white;
+    box-shadow: 8px 0px 10px #E8E3E3;
+    padding-left: 0px;
+    z-index: 1;
+
+}
+
+
+.hrShrink{
+    width: 60px;
+}
+
+
+.sideBarBar{
+    border-left: 4px solid #007bff;
+}
+
+.h4s{
+    margin-left: 0.7em;
+    font-size: 1.5em;
+    align-self: center;
+}
+
+.menu{
+    display: flex;
+    margin: 1em;
+    background-color: white ;
+    height: 5em;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px grey;
+}
+
+
+
+footer{
+    position: relative;
+    background-color: white;
+    box-shadow: 0px 2px 4px #E8E3E3;
+    z-index: 2;
+    min-height:10%;
+}
+
+.newRow{
+    margin:2em;
+}
+
+.Nav{
+
+    margin:0px;
+    padding: 0px;
+}
+
+.hrInDisguise{
+    font-size: 1.5em;
+    border-bottom: 1px solid darkgray;
+    padding-bottom: 0.5em;
+}
+
+
+.tableZone{
+    background-color: white;
+    box-shadow: 0px 1px 5px darkgrey;
+
+
+}
+
+table{
+    margin: 4em 1em ;
+    border: 1px solid #DEE2E6;
+}
+
+th,td{
+    border: 1px solid #DEE2E6;
+    text-align: center;
+}
+
+.tableZoneZone{
+    background-color: #F7F7F7;
+    margin:2em;
+    box-shadow: 0px 1px 5px darkgrey;
+    padding: 1em 0em 1em 0em;
+    border: 1px solid #DEE2E6;
+
+}
+
+.addItem{
+    color: #28A745;
+    font-size: 1.5em;
+    margin-top: 0.7em;
+
+}
+
+.addItem:hover{
+    color: #1D7731;
+}
+
+.current{
+    color: #007bff;
+}
+
+
+
+
+@media all and (max-width: 768px) {
+
+    .loginbox{
+
+        background-color: rgba(255,255,255,0.85);
+        box-shadow: 0px 2px 4px grey;
+        margin-right:4em;
+        margin-left: 4em;
+    }
+
+
+}
+
+@media all and (min-width: 576px) and (max-width:768px)  {
+   /* .menu{
+        display: flex;
+        margin: 1em;
+        background-color: crimson ;
+        height: 5em;
+        border-radius: 8px;
+        box-shadow: 0px 2px 8px grey;
+    }*/
+    .newRow{
+        margin: 1.5em;
+    }
+
+}

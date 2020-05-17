@@ -1,0 +1,38 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+                               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock %}
+
+
+<div style=" font-size: 2em; text-align: end; " class="fixed-top">
+
+    <a href="{{ path('print_composition',{'codeProduit' : codeProduit , 'nomProduit' : nomProduit }) }}" title="Télécharger" style="color: white"> <i class="fas fa-download" style="margin-right: 0.5em;"></i> </a>
+
+    <a href="#" title="Fermer"> <i class="fas fa-times" style="margin-right: 0.5em; color:white"></i> </a>
+</div>
+
+
+<h2 style="font-weight: bold"> Composition du produit : {{ nomProduit }}</h2>
+<table class="table table-bordered" style="margin-left: -0.2em">
+    <thead>
+    <tr>
+        <th scope="col">Composant</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Unité</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for composant in composants %}
+    <tr>
+        <th scope="row">{{ composant.nomComp}}</th>
+        <td>{{ composant.quantiteComp}}</td>
+        <td>{{ composant.unite }}</td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% block javascripts %} <script src="{{ asset('JavaScript/JQuery.js') }}"></script> {% endblock %}

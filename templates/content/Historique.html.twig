@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des commandes honorées{% endblock %}
+
+
+{% block body %}
+    {{ include('includes/navbar.html.twig') }}
+
+<div class="wrapper">
+    {{ include('includes/sidebar.html.twig') }}
+
+
+    <!--Content-->
+    <div class="container-fluid" style="position: relative ">
+        <div class="row hrInDisguise justify-content-center " style="margin: 2em">
+            <h3> Historique Des Commandes Honorées </h3>
+        </div>
+
+        <div class="row tableZone" style="margin: 2em">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID de la Commande </th>
+                    <th scope="col">Date de création</th>
+                    <th scope="col">Boulangerie </th>
+                    <th scope="col">Opérateur</th>
+                    <th scope="col">Details de la commande</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commande in commandes  %}
+                <tr>
+
+
+                    <th scope="row">{{ commande.idCommandeBL }}</th>
+                    <td>{{ commande.creationDate }}</td>
+                    <td>{{ commande.idBoulangerie}} - {{ commande.nomBL }}</td>
+                    <td>{{ commande.matricule}} - Livreur</td>
+                    <td><a href="{{ path('details_commande', { 'id' : commande.idCommandeBL , 'nomBL' : commande.nomBL,
+                           'dueDate' : commande.dueDate }) }}"
+                           class="Details" style="text-decoration: underline">Voir Details</a></td>
+                </tr>
+                     {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+    <footer></footer>
+
+    {{ include('includes/changePasswordModal.html.twig') }}
+
+{% endblock %}

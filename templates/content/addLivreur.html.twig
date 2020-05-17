@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un Livreur {% endblock %}
+
+{% block body_class %} origin {% endblock %}
+
+{% block body %}
+    <div class="addForm container" style="display: inline-block">
+
+        <div class="row">
+            <h3 CLASS="formTitle"> Ajouter un Livreur </h3>
+
+        </div>
+        <hr>
+        <div class="row justify-content-around" style="margin-top: 2em">
+
+            {{ form_start(form_Livreur , {attr : { 'style ': "text-align: left" , 'class' : "col-xl-6 col-lg-6 col-md-6 col-sm-9 col-xs-9 form-alert"}}) }}
+            {{ form_row(form_Livreur.matricule , { 'label' : "Matricule " , attr : {'placeholder' : "Entrez la matricule du livreur"}}) }}
+            {{ form_row(form_Livreur.teleLivreur , { 'label' : "Telephone" , attr : {'placeholder' : "(+33) 06 12 34 56 78"}}) }}
+            {{ form_row(form_Livreur.numVehicule , { 'label' : "Numero du Véhicule " , attr : {'placeholder' : "Entrez le numero du vehicule"}}) }}
+
+            <div class="col-12 " style="text-align: end ; margin: 2em 0em 0.8em 0em ">
+                <button type="submit" class="btn btn-dark submitButt postB" style="margin-right: 0.5em">Ajouter </button>
+                <a href="{{ path('livreurs')}}">
+                    <button type="button" class="btn btn-secondary submitnt " style="margin-left: 0.5em">Retour </button></a></div>
+
+            {{ form_end(form_Livreur) }}
+        </div>
+
+
+    </div>
+
+
+    <div style="height: 10%; "></div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un Produit {% endblock %}
+
+{% block body_class %} origin {% endblock %}
+
+{% block body %}
+<div class="addForm container" style="display: inline-block">
+
+    <div class="row">
+        <h3 CLASS="formTitle"> Ajouter un Produit </h3>
+
+    </div>
+    <hr>
+    <div class="row justify-content-around" style="margin-top: 2em">
+
+        {{ form_start(form_product , {attr : { 'style ': "text-align: left" , 'class' : "col-xl-6 col-lg-6 col-md-6 col-sm-9 col-xs-9 form-alert"}}) }}
+        {{ form_row(form_product.libelle , { 'label' : "Désignation" , attr : {'placeholder' : "Entrez la désignation du produit"}}) }}
+        {{ form_row(form_product.prixHA , { 'label' : "Prix HA" , attr : {'placeholder' : "000.000"}}) }}
+        {{ form_row(form_product.TVA , { 'label' : "TVA" , attr : {'placeholder' : "000.000"}}) }}
+
+        <div class="col-12 " style="text-align: end ; margin: 2em 0em 0.8em 0em ">
+            <button type="submit" class="btn btn-primary " style="margin-right: 0.5em">
+                Continuer
+                <i class="fas fa-arrow-right" style="margin-left: 0.7em" ></i>
+            </button>
+        </div>
+
+        {{ form_end(form_product) }}
+    </div>
+</div>
+
+    {% endblock %}
+

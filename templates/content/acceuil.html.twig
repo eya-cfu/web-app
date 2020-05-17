@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'acceuil{% endblock %}
+
+{% block body_id %}
+    "acceuil"
+{% endblock %}
+
+
+{% block body %}
+   {{ include('includes/navbar.html.twig') }}
+
+     <div class="wrapper">
+        {{ include('includes/sidebar.html.twig') }}
+
+
+
+           <div class="container-fluid" >
+            <div class="row justify-content-end " style=" margin:2em;">
+
+                <button class="btn btn-dark"> <a href="{{ path('historique') }}" style=" color : white"> <i class="fas fa-history" style="margin-right:1em"></i>
+                        Historique des commandes Honorées</a> </button>
+            </div>
+
+                     <div class="row" style=" margin:2em;" >
+
+                <p class="col-12 hrInDisguise"  >
+                    <i class="fas fa-th" Style="margin-right: 0.7em"></i>
+
+                    <span style="color: #050F4F"> Menus </span> </p>
+
+                     </div>
+
+                  <div class="row justify-content-around newRow" >
+                <div class="col-xl-4 col-lg-5 col-md-9 col-sm-9 col-xs-9 menu" >
+
+                    <button type="button" class=" btn btn-light greenyThing justify-content-center"  >
+                        <a href="{{ path('profiles') }}">   <i class="fas fa-align-right" style="color: white ; font-size: 2em"></i></a>
+
+
+
+                    </button>
+
+                    <h4 class="h4s"> Les Profils </h4>
+                </div>
+
+                <div class="col-xl-4 col-lg-5 col-md-9 col-sm-9 col-xs-9 menu" >
+
+                    <a href="{{ path('boulangeries')}}" type="button" class=" btn btn-light greenyThing justify-content-center align-items-center"
+                    style="display: flex">
+                      <i class="fas fa-align-right" style="color: white ; font-size: 2em; "></i>
+                    </a>
+
+                    <h4 class="h4s"> Les Boulangeries </h4>
+                </div>
+            </div>
+            <div class="row justify-content-around newRow" >
+                <div class="col-xl-4 col-lg-5 col-md-9 col-sm-9 col-xs-9 menu menu " >
+
+                    <button type="button" class=" btn btn-light greenyThing justify-content-center"  >
+                        <a href="{{ path('products') }}"> <i class="fas fa-align-right" style="color: white ; font-size: 2em"></i></a>
+
+                    </button>
+
+                    <h4 class="h4s"> Les Produits </h4>
+                </div>
+
+                <div class="col-xl-4 col-lg-5 col-md-9 col-sm-9 col-xs-9 menu " >
+
+                    <button type="button" class=" btn btn-light greenyThing justify-content-center"  >
+                        <a href="{{ path('livreurs') }}"> <i class="fas fa-align-right" style="color: white ; font-size: 2em"></i> </a>
+                    </button>
+                    <h4 class="h4s"> Les Livreurs </h4>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    </div>
+
+    <footer></footer>
+
+     {{ include('includes/changePasswordModal.html.twig') }}
+
+
+{% endblock %}

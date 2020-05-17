@@ -1,0 +1,28 @@
+
+{{ form_start(form_modify , {'action' : path('boulangerie_modify',{'id' : id})   }) }}
+<div class="modal-body">
+    <div class="form-group" style="display: none">
+        <label>IDBoulangerie</label>
+        <input type="text" class="form-control" name="modification" placeholder="number1" value="{{ Mod.idBoulangerie }}" >
+    </div>
+
+
+    {{ form_row(form_modify.nomBL , { 'value': Mod.nomBL  , 'label' : "Nom Boulangerie " , attr : {'placeholder' : "Entrez le nom de la boulangerie"}}) }}
+    {{ form_row(form_modify.adresse , { 'value' : Mod.adresse ,attr : { 'placeholder' : "Entrez une adresse"}})  }}
+    {{ form_row(form_modify.telephone  , {'value' : Mod.telephone ,attr : {'placeholder' : "(+33) 06 12 34 56 78"} }) }}
+    {{ form_row(form_modify.nbOperateurs , { 'value' : Mod.nbOperateurs ,'label' : "Nombre des operateurs" , attr : { 'placeholder' : "Entrez un nombre"}}) }}
+
+    <label>Matricule du responsable</label>
+    <br>
+    <span  style="opacity: 60%"> Vérifier que la nouvelle matricule (si modifiée) existe déja .</span>
+    {{ form_widget(form_modify.matricule , { 'value' : Mod.matricule , attr : { 'placeholder' : "Entrez 4 chiffres"}}) }}
+
+    <span class="error" style="margin-left: 0.5em ; color: #88001b"></span>
+
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary confirmed">Enregistrer </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+</div>
+                   {{ form_end(form_modify) }}
+

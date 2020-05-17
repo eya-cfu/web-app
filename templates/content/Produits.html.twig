@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+
+{% block body %}
+    {{ include('includes/navbar.html.twig') }}
+
+<div class="wrapper">
+    {{ include('includes/sidebar.html.twig') }}
+
+
+    <!--Content-->
+    <div class="container-fluid" style="position: relative ">
+        <div class="row justify-content-end " style="margin: 2em">
+            <div class="col-lg-4 col-sm-12 col-xs-12">
+                <form>
+                    <div class="input-group" >
+                        <input type="text" class="form-control" placeholder="Search" name="search" style="border-radius: 10px 0px 0px 10px">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" style="background-color: white; border: 1px solid #DEE2E6;
+                            border-radius: 0px 10px 10px 0px">
+                                <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row justify-content-center " style="padding:1em">
+        <div class="col-12 tableZoneZone"  style="margin-bottom: 0px ; text-align: center">
+            <h3 > LES PRODUITS </h3> </div>
+        <div class="tableZone col-12 justify-content-center" style="margin: 0px 2em; text-align: center ">
+            <div class="col-12" style="text-align: end; margin-right: 1em">
+                <a href="{{ path('add_product') }}"> <i class="fas fa-plus addItem" ></i> </a>
+            </div>
+            <table class="table table-striped" style="margin-left: auto ; margin-right: auto">
+                <thead>
+                <tr>
+                    <th scope="col">Code</th>
+                    <th scope="col">Désignation</th>
+                    <th scope="col">Prix HA </th>
+                    <th scope="col">TVA</th>
+                    <th scope="col">Prix TTC</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Modification</th>
+                    <th scope="col">Supprimer</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for Product in Products  %}
+                <tr>
+                    <th scope="row">{{ Product.codeProduit}}</th>
+                    <td>{{ Product.libelle }}</td>
+                    <td>{{ Product.prixHA }}</td>
+                    <td>{{  Product.TVA }}</td>
+                    <td>{{ Product.prixTTC }}</td>
+                    <td> <a href="#" data-target ="{{ path('composition',{'codeProduit' : Product.codeProduit , 'nomProduit' : Product.libelle }) }}" class="description" style="text-decoration: underline"> Description </a> </td>
+
+                    <td>
+                        <a href="#modify"
+                           type="button" class="btn btn-success Update" data-toggle="modal" data-target="{{ path('product_modify',{'codeProduit' :  Product.codeProduit }) }}">
+                            Modifier </a>
+
+                    </td>
+
+                    <td><a href="{{ path('product_delete',{'codeProduit' : Product.codeProduit}) }}"
+                           type="button" class="btn btn-danger Remove" data-toggle="modal" data-target="#exampleModalCenter">
+                            Supprimer</a></td>
+                </tr>
+{% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+    <!-- Confirm Remove Modal-->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmation de la supression</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Etes-vous sur de vouloir supprimer ce produit ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary confirmed">confirmer </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modification Modal-->
+    <div class="modal modificationModal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal">Modification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-form">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+
+    <!--compositions modal-->
+    <div class="blackback display" >
+
+    <div style=" font-size: 2em; text-align: end; " class="fixed-top" id="theOne">
+        <i class="fas fa-times" style="margin-right: 0.5em; color:white"></i>
+    </div>
+
+    <div class="container compositionsBox">
+        <!-- call composition.html.twig -->
+    </div>
+
+</div>
+    {{ include('includes/changePasswordModal.html.twig') }}
+{% endblock %}

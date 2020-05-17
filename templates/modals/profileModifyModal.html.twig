@@ -1,0 +1,80 @@
+{{ form_start(form_modify , {'action' : path('profile_modify',{'matricule' : matricule})   }) }}
+<div class="modal-body">
+
+    <div class="form-group" style="display: none">
+        <label>Matricule</label>
+        {{ form_widget(form_modify.matricule,  { 'value' : credentials.matricule })}}
+
+    </div>
+
+    <div class="form-group" style="display: none">
+        <label>Nom</label>
+        {{ form_widget(form_modify.nom,  { 'value' : credentials.nom})}}
+
+    </div>
+
+    <div class="form-group" style="display: none">
+        <label>Affectation</label>
+        {{ form_widget(form_modify.affectation, { 'value' : credentials.affectation })}}
+
+    </div>
+
+    {{ form_row(form_modify.login , { 'label' : "Login ", 'value' : credentials.login }) }}
+        {{ form_row(form_modify.password, { 'label' : "Mot de passe  "  , attr : {'class' : "toggPwd"} , "value" : credentials.password })  }}
+
+    <div class="form-group">
+        <label>Confirmation</label>
+        {{ form_widget(form_modify.confirm_password, { 'label' : "Confirmation "  , attr : {'class' : "toggPwd"} , "value" : credentials.password })}}
+        <span style="color: #88001b; display: none"> Vous n'avez pas tapé le même mot de passe! </span>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary confirmed">Enregistrer </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+</div>
+{{ form_end(form_modify) }}
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script>
+
+        $('form').submit(function (e) {
+
+    if(  $('input[name="profile[password]"]').val() != $('input[name="profile[confirm_password]"]').val())
+    {
+        e.preventDefault();
+         $('span').css({'display' : ""});
+    }else {var url ="https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils/"+ {{ matricule }};
+
+        $.ajax({
+            method: 'GET',
+            url: url
+
+        }).done(function(msg){
+            console.log(msg);
+
+        }).fail(function () {
+            alert('Une erreur est survenue :(');
+             location.reload();
+        })
+
+    }
+
+
+        })
+
+        $('input.toggPwd').focus(function () {
+
+            $(this).attr('type', 'text');
+        })
+
+        $('input.toggPwd').focusout(function () {
+
+            $(this).attr('type', 'password');
+        })
+
+    </script>
+{% endblock %}

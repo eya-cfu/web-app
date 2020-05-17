@@ -1,0 +1,20 @@
+{{ form_start(form_modify , {'action' : path('livreur_modify',{'matricule' : matricule})   }) }}
+<div class="modal-body">
+    <div class="form-group" style="display: none">
+        <label>Matricule</label>
+        {{form_widget(form_modify.matricule , { 'value' : Mod.matricule })}}
+
+    </div>
+
+    {{ form_row(form_modify.teleLivreur , { 'value': Mod.teleLivreur,'label' : "Téléphone " }) }}
+    {{ form_row(form_modify.numVehicule , { 'value': Mod.numVehicule , 'label' : "numéro du Véhicule " })  }}
+
+
+
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary confirmed">Enregistrer </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+</div>
+{{ form_end(form_modify) }}
+

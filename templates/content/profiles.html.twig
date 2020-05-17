@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profils{% endblock %}
+
+
+{% block body %}
+    {{ include('includes/navbar.html.twig') }}
+
+<div class="wrapper">
+    {{ include('includes/sidebar.html.twig') }}
+
+    <!--Content-->
+    <div class="container-fluid" style="position: relative ">
+        <div class="row justify-content-end " style="margin: 2em">
+            <div class="col-lg-4 col-sm-12 col-xs-12">
+                <form>
+                    <div class="input-group" >
+                        <input type="text" class="form-control" placeholder="Search" name="search" style="border-radius: 10px 0px 0px 10px">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" style="background-color: white; border: 1px solid #DEE2E6;
+                            border-radius: 0px 10px 10px 0px">
+                                <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row my-row justify-content-center tableZoneZone"  style="margin-bottom: 0px">
+            <h3 > LES PROFILS </h3>
+        </div>
+
+        <div class="tableZone row justify-content-center" style="margin: 0px 2em; ">
+            <div class="col-12" style="text-align: end; margin-right: 1em">
+                <a href="{{ path('profile_add') }}"> <i class="fas fa-plus addItem" ></i> </a>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Affectation </th>
+                    <th scope="col">Authentification</th>
+                    <th scope="col">Supprimer</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for profil in profils %}
+                <tr>
+                    <th scope="row">{{ profil.matricule }}</th>
+                    <td>{{ profil.nom }}</td>
+                    <td>{{ profil.affectation }}</td>
+                    <td> <a href="#" class="CheckCred" style="text-decoration: underline" id="needPwd" data-toggle="modal" data-target="{{ path('profile_modify',{'matricule' : profil.matricule })}}"> Afficher login et mdp </a> </td>
+                    <!--if pwd right upload all the info and display it in a modal -->
+
+
+                    <td>
+                        <a href="{{ path('profile_delete',{'matricule' : profil.matricule}) }}"
+                           type="button" class="btn btn-danger Remove" data-toggle="modal" data-target="#exampleModalCenter">
+                            Supprimer</a></td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+    <!-- Confirm Remove Modal-->
+    <div class="modal  fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTit">Confirmation de la supression</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Etes-vous sur de vouloir supprimer ce profil ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary confirmed">confirmer </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modification Modal-->
+    <div class="modal modificationModal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title" id="exampleModalLongTitl">Authentification</h5>
+                        <br>
+                        <span>En cliquant sur Confirmer toutes les modifications seront appliqués. </span>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+
+                </div>
+                <div class="modal-form">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer></footer>
+    {{ include('includes/changePasswordModal.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        /*Login Modal for profile*/
+
+        $('.CheckCred').click(function () {
+
+            const url = $(this).attr('data-target');
+            $.get(url, function (data) {
+                console.log(data);
+                $('.modal-form').html(data);
+                $('.modificationModal').modal();
+
+            })
+
+        })
+    </script>
+{% endblock %}

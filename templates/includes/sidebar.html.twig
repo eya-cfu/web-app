@@ -1,0 +1,73 @@
+{% set currentPath =  app.request.attributes.get('_route') %}
+
+<div class="sideBar">
+    <ul class="list-unstyled"  >
+        <li id="active">
+            <div class="component ">
+                <a href="{{ path('content') }}" {% if currentPath == "content" or currentPath == "historique" %} style="color: #007bff" {% endif %}>
+                    <i class="fas fa-home icon"> </i>  <span class="hideable">Acceuil</span> </a>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="hideable">
+                    <i class="fas fa-angle-down arrow"></i> </a> </div>
+            <ul class="list-unstyled {% if currentPath == "content" or currentPath == "historique" %} collapse {% endif %}" id="homeSubmenu">
+                <hr class="hideable">
+                <li>
+
+                    <a class="OpA" href="{{ path('profiles')}}" {% if currentPath == "profiles" %} style="color: #007bff"{% endif %}> Profils </a>
+                </li>
+                <hr class="hideable">
+                <li>
+
+                    <a class="OpA" href="{{ path('boulangeries')}}" {% if currentPath == "boulangeries" %} style="color: #007bff" {% endif %}> Boulangeries </a>
+                </li>
+                <hr class="hideable">
+                <li>
+
+                    <a class="OpA" href="{{ path('products') }}" {% if currentPath == "products" %} style="color: #007bff"{% endif %}> Produits </a>
+                </li>
+                <hr class="hideable">
+                <li>
+                    <a class="OpA" href="{{ path('livreurs')}}" {% if currentPath == "livreurs" %} style="color: #007bff"{% endif %}> Livreurs </a>
+                </li>
+                <br>
+            </ul>
+        </li>
+
+
+        <!--the block coming next is reserved for authentification update-->
+
+        <!--  <hr  id="mSpecialBar">
+
+        <li>
+
+            <div class="component">
+                <a href="#authSubmenu" data-toggle="collapse" aria-expanded="false"  >
+                    <i class="fas fa-unlock-alt icon "></i> <span class="hideable">Auth
+
+
+                      <i class="fas fa-angle-down arrow"></i> </span> </a>
+
+            </div>
+
+            <ul class="list-unstyled collapse" id="authSubmenu">
+                <hr class="hideable">
+                <li>
+                    <a class="OpA" href="#" data-toggle="modal" data-target="#ChangerMdp"> Changer le mot de passe </a>
+                </li>
+                <hr class="hideable">
+                <li>
+                    <a class="OpA" href="#" > s'inscrire  </a>
+                </li>
+
+                <hr class="hideable">
+                <li>
+                    <a class="OpA" href="#" > se déconnecter  </a>
+                </li>
+            </ul>
+
+        </li>-->
+
+    </ul>
+
+
+</div>
+

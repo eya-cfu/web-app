@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un Profil {% endblock %}
+
+{% block body_class %} origin {% endblock %}
+
+{% block body %}
+    <div class="addForm container" style="display: inline-block">
+
+        <div class="row">
+            <h3 CLASS="formTitle"> Ajouter un Profil </h3>
+
+        </div>
+        <hr>
+        <div class="row justify-content-around" style="margin-top: 2em">
+
+            {{ form_start(form_profile , {attr : { 'style ': "text-align: left" , 'class' : "col-xl-6 col-lg-6 col-md-6 col-sm-9 col-xs-9 form-alert"}}) }}
+            {{ form_row(form_profile.matricule , { 'label' : "Matricule " , attr : {'placeholder' : "Entrez 4 chiffres"}}) }}
+            {{ form_row(form_profile.nom , { 'label' : "Nom " , attr : { 'placeholder' : "Entrez un nom"}})  }}
+            {{ form_row(form_profile.affectation , { 'label' : "Affectation " }) }}
+            {{ form_row(form_profile.login , { 'label' : "login" , attr : { 'placeholder' : "Entrez un login"}}) }}
+            {{ form_row(form_profile.password , { 'label' : "Mot de passe " , attr : { 'placeholder' : "Entrez un mot de passe " , 'class' : "toggPwd"}}) }}
+            {{ form_row(form_profile.confirm_password , { 'label' : "Confirmation du mot de passe " , attr : { 'placeholder' : "Confirmez le mot de passe " ,  'class' : "toggPwd"}}) }}
+
+            <div class="col-12 " style="text-align: end ; margin: 2em 0em 0.8em 0em ">
+                <button type="submit" class="btn btn-dark submitButt postB" style="margin-right: 0.5em">Ajouter </button>
+                <a href="{{ path('profiles')}}">
+                    <button type="button" class="btn btn-secondary submitnt " style="margin-left: 0.5em">Retour </button></a></div>
+
+            {{ form_end(form_profile) }}
+        </div>
+
+
+    </div>
+
+
+    <div style="height: 10%; "></div>
+{% endblock %}
+{% block javascripts %}
+
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un Produit {% endblock %}
+
+{% block body_class %} origin {% endblock %}
+
+{% block body %}
+
+    <div class="addForm container" style="display: inline-block;">
+
+    <div class="col-12 my-form" style="text-align: start">
+        <h3 CLASS="formTitle" style="padding-left: 0px; padding-bottom: 0px; padding-top: 2em"> Description du produit : {{ codeProduit }} </h3>
+        <span> Ajouter les composants necessaires a votre produit .<br> Une fois enregistrée,aucune modification de la description du produit ne sera possible.</span>
+    </div>
+    <br>
+    <hr>
+    <div class="row justify-content-around" style="margin-top: 2em">
+
+        <div class="col-12 plus" style="text-align: end; margin-right: 1em">
+            <a href="#" class="Comp" title="Cliquez pour ajouter un composant" data-toggle="modal" data-target="#addComp">
+                <i class="fas fa-plus addItem" ></i> </a>
+        </div>
+
+        <div class="col-9 empty" style="min-height:10em ; opacity: 60%">
+            <h2> Aucun composant ajouté..</h2>
+
+        </div>
+        <table class="table table-hover display" style="margin-bottom: 10%">
+            <thead>
+            <tr>
+                <th scope="col">Composant</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Annuler</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div style="text-align: end; align-self: end" class=" col-12 ">
+        <button type="button" class="btn btn-dark submitButt " data-target="{{ path('post_compositions',{'codeProduit' : codeProduit}) }}"
+                data-next="{{ path('products') }}" style="margin-right: 0.5em">Terminer </button>
+        <a href="{{ path('products') }}">
+            <button type="button" class="btn btn-secondary submitnt " style="margin-left: 0.5em">Retour </button></a></div>
+
+
+
+
+    </div>
+
+    <div style="height: 10%; "></div>
+
+    <!-- Add Composant Modal-->
+    <div class="modal fade" id="addComp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModal">Modification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="my-form">
+                    <div class="modal-body" style="text-align: start" >
+
+                        <div class="form-group row" style="margin-left: 0em">
+                            <label class="col-12" style="padding-left: 0px">Nom du composant </label>
+                            <select class="form-control col-4" id="FormControlSelect">
+
+                                {% for composant in composants %}
+                                <option data-id="{{ composant.idComposant }}">{{ composant.nomComp }} </option>
+                                {% endfor %}
+                                <option>Autre</option>
+                            </select>
+                            <input type="text" class="form-control EnableMe col-6" id="FormNameInput" disabled>
+
+                        </div>
+                        <div class="form-group newComp display">
+                            <label>IDComposant</label>
+                            <input type="number" id="FormIdInput" class="form-control">
+
+                        </div>
+                        <div class="form-group newComp display">
+                            <label>Unité</label>
+                            <select class="form-control col-4" id="FormUnitySelect">
+
+                                <option> ml </option>
+                                <option> grammes </option>
+                                <option> Litres </option>
+                                <option> kilogrammes </option>
+                                <option> - </option>
+
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Quantité</label>
+                            <input type="text" class="form-control quantite" required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button data-target="{{ path('post_composant') }}" type="submit" class="btn btn-primary" >Enregistrer </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    </div>
+
+
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('JavaScript/Composants.js') }}"></script>
+    <script>
+        $('button.submitButt').click(function () {
+            var TTC = {{ product.prixHA }} + {{ product.TVA }};
+            var product = { 'libelle' : "{{ product.libelle }}", 'prixHA' : {{ product.prixHA }}, 'TVA' : {{ product.TVA }} , 'prixTTC': TTC}
+
+            console.log(product);
+
+            $.ajax({
+                method: 'POST',
+                url: "https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/produits",
+                dataType: 'json',
+                data: JSON.stringify(product)
+
+            }).always(function (xhr) {
+ if(xhr.status == 201)
+ {
+     console.log('sucess');
+ }
+            })
+        })
+    </script>
+{% endblock %}
+
+
