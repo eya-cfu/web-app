@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 
-require 'C:\xampp\htdocs\AdminInterfacee\vendor\autoload.php' ;
+require __DIR__ . '\..\..\vendor\autoload.php' ;
 
 use App\Entity\Boulangerie;
 

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40c0fd75-2e45-438e-8dc6-dd840a480bb5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ContentController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,6 +210,7 @@
       <workItem from="1589711114796" duration="12607000" />
       <workItem from="1589747307739" duration="7607000" />
       <workItem from="1589757223528" duration="1260000" />
+      <workItem from="1589760063463" duration="508000" />
     </task>
     <task id="LOCAL-00001" summary="added missing folders">
       <created>1589752956619</created>
@@ -236,10 +238,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="225" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589752659932" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1589757263427">
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1589760065953">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1589757263427" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1589760065953" />
     <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589751694186">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
