@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="40c0fd75-2e45-438e-8dc6-dd840a480bb5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +210,14 @@
       <workItem from="1589747307739" duration="7607000" />
       <workItem from="1589757223528" duration="1260000" />
       <workItem from="1589760063463" duration="1374000" />
-      <workItem from="1589882563459" duration="78000" />
+      <workItem from="1589882563459" duration="1067000" />
+      <workItem from="1589888430311" duration="709000" />
+      <workItem from="1590101329118" duration="2685000" />
+      <workItem from="1590147000491" duration="736000" />
+      <workItem from="1590181332106" duration="1637000" />
+      <workItem from="1590344165861" duration="710000" />
+      <workItem from="1590488528487" duration="4842000" />
+      <workItem from="1590603492591" duration="293000" />
     </task>
     <task id="LOCAL-00001" summary="added missing folders">
       <created>1589752956619</created>
@@ -246,10 +252,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="225" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589760581608" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1589760065953">
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1590344223684">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1589760065953" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1590344223684" />
     <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589751694186">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
