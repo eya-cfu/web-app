@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body_id %}"login"{% endblock %}
+
+{% block body %}
+
+    <div class="container mainDiv " style="margin-top: 10%">
+        <div class="row justify-content-center " >
+            <div class="col-lg-4 col-md-6 col-sm-9 loginbox">
+                <div class="text-center">
+                    <img src="{{ asset('pics/LogUser.png') }}" class="UserPic"/>
+                    <p style="font-size: medium; font-weight: bold; margin-top: 1em"> Administrateur </p>
+                </div>
+                <form class="my-form">
+
+                    <div class="form-group">
+                        <label  style="color:  #050F4F" >Adresse e-mail</label>
+                        <input type="email" class="form-control" placeholder="Entrer votre Login">
+                    </div>
+
+                    <div class="form-group">
+                        <label style="color:  #050F4F">Mot de passe</label>
+                        <input type="password" class="form-control" placeholder="**********" >
+                    </div>
+
+                    <div class="text-center">
+                        <a href="{{ path('content') }}" type="button" class="btn btn-secondary submitButt">Login</a>
+
+                        <a href="#" style="display: block ; margin-bottom: 1em; color:dimgrey" class="link" data-toggle="modal" data-target="#EntrerLogin">
+                            Mot de passe oubliée? </a>
+                    </div>
+                </form>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Send pwd to Modal-->
+    <div class="modal fade" id="EntrerLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLong">Récuperation du mot de passe </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="my-form">
+                        <div class="form-group">
+                            <label style="color: gray; font-weight: bold">Login</label>
+                            <input type="email" class="form-control" placeholder="Entrer votre Login" required>
+                            <br>
+                            <span> Entrer l adresse e-mail correspondante au mot de passe que vous voulez récupérer. </span>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#ObtenirMdp">Récupérer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send password Modal-->
+    <div class="modal fade" id="ObtenirMdp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Envoyé <i class="far fa-check-circle" style="color: #28A745; margin-left: 0.5em"></i></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Votre mot de passe a été envoyé a votre adresse e-mail .
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

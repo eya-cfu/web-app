@@ -6,29 +6,23 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use GuzzleHttp\Client;
 
-class ToBeOrNoToBeValidator extends ConstraintValidator
+class LoginUniqueValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
+
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->get('https://boulang.ml/profils/'.$value);
+            $response = $client->get('https://boulang.ml/profils/Login/'.$value);
 
             $status =$response->getStatusCode();
 
-                $response = $response->getBody()->getContents();
-                $profil= (array)(json_decode($response));
+        }catch (\GuzzleHttp\Exception\RequestException $e)
+        {
+            return;
+        }
 
-                if ($profil['affectation'] == 'Boulangerie' || $profil['affectation'] == '' || $profil['affectation'] == 'boulangerie' )
-                    return;
-
-
-        }catch(\GuzzleHttp\Exception\RequestException $e){}
-
-
-
-
-        /* @var $constraint \App\Validator\ToBeOrNoToBe */
+        /* @var $constraint \App\Validator\LoginUnique */
 
         if (null === $value || '' === $value) {
             return;
@@ -36,6 +30,7 @@ class ToBeOrNoToBeValidator extends ConstraintValidator
 
         // TODO: implement the validation here
         $this->context->buildViolation($constraint->message)
+            ->setParameter('{{ value }}', $value)
             ->addViolation();
     }
 }

@@ -11,6 +11,7 @@ $('a.Comp').click(function () {
 
       }
       else{
+          $('input.EnableMe').val('');
           $('input.EnableMe').prop("disabled", true);
           $('div.newComp').hide();
       }
@@ -21,50 +22,57 @@ $('a.Comp').click(function () {
 
 var myarray = [] ;
 
-$('form').submit(function (event) {
-    event.preventDefault();
+$('form').submit((event) => {
 
+    event.preventDefault();
+    event.stopPropagation();
 
         var val = $('select#FormControlSelect').val()  ;
 
-        if(val == 'Autre')
-        {
-           var val = $('input#FormNameInput').val();
-           var unite = $('select#FormUnitySelect').val();
-           var id = $('input#FormIdInput').val();
+    if(val == 'Autre')
+    {
+        var val = $('input#FormNameInput').val();
+        var unite = $('select#FormUnitySelect').val();
+        var id = $('input#FormIdInput').val();
 
-          var composant = { 'idComposant' : id , 'nomComp': val , 'unite': unite}
-            const urlc = $('button.btn-primary').attr('data-target');
+        var composant = { 'idComposant' : id , 'nomComp': val , 'unite': unite}
+        const urlc = $('button.btn-primary').attr('data-target');
 
-            console.log(urlc);
+        console.log(urlc);
 
-            $.ajax({
-                method: 'POST',
-                url: urlc,
-                dataType: 'json',
-                data: JSON.stringify(composant)
+        $.ajax({
+            method: 'POST',
+            url: urlc,
+            dataType: 'json',
+            data: JSON.stringify(composant)
 
-            }).done(function(msg){
-                console.log(msg);
-            }).fail(function () {
-                 alert('Requête échoué, cet ID est déja utilisé');
-            })
+        }).done(function(msg){
+            console.log(msg);
+            var quantity = $('input.quantite').val();
+            $('table.table-hover tbody').append('<tr> <td>' + val + '</td> <td>' + quantity + '</td> <td> <a href="#"><i class="fas fa-times-circle" style="color: firebrick"></i></a> </td></tr>');
+            var composition = {'idComposant': id, 'nomComp': val, 'quantiteComp': quantity}
+            myarray.push(composition);
+
+        }).fail(function () {
+            alert('Requête échoué, cet ID est déja utilisé');
+            return false;
+        })
 
 
-        }else{
-            var id = $('select#FormControlSelect').find(':selected').attr('data-id');
-        }
+    }else{
 
+        var id = $('select#FormControlSelect').find(':selected').attr('data-id');
         var quantity = $('input.quantite').val();
-        $('div.empty').addClass('display');
-        $('table').removeClass('display');
-
-        $('table.table-hover tbody').append('<tr> <td>' +val +'</td> <td>'+quantity+'</td> <td> <a href="#"><i class="fas fa-times-circle" style="color: firebrick"></i></a> </td></tr>');
-
-
-
-        var composition = {'idComposant': id , 'nomComp':val , 'quantiteComp' : quantity}
+        $('table.table-hover tbody').append('<tr> <td>' + val + '</td> <td>' + quantity + '</td> <td> <a href="#"><i class="fas fa-times-circle" style="color: firebrick"></i></a> </td></tr>');
+        var composition = {'idComposant': id, 'nomComp': val, 'quantiteComp': quantity}
         myarray.push(composition);
+
+    }
+
+
+    $('div.empty').addClass('display');
+    $('table').removeClass('display');
+
 
         $('.modal').modal('hide');
 
@@ -87,23 +95,39 @@ $('form').submit(function (event) {
 
 
 
+        $('button.submitButt').click(function (event) {
 
-        $('button.submitButt').click(function () {
 
+
+            const urlfirst = $(this).attr('data-first');
             const url = $(this).attr('data-target');
             const urlNext =$(this).attr('data-next');
-
+            console.log(urlfirst);
+            console.log('submit');
             $.ajax({
-                method: 'POST',
-                url: url,
-                dataType: 'json',
-                data: JSON.stringify(myarray)
+                method: 'GET',
+                url: urlfirst,
 
-        }).done(function(msg){
+            }).done(function (msg) {
                 console.log(msg);
-                alert('Envoyé avec success');
+
+                $.ajax({
+                    method: 'POST',
+                    url: url,
+                    dataType: 'json',
+                    data: JSON.stringify(myarray)
+
+                }).done(function(msg){
+                    console.log(msg);
+                    alert('Envoyé avec success');
+                    location.replace(urlNext);
+                })
+
+            }).fail(function () {
                 location.replace(urlNext);
             })
+
+
         })
 
 })

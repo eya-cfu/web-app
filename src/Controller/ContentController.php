@@ -12,18 +12,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+
+/**
+ * Class ContentController
+ * @package App\Controller
+ * @Route("/content")
+ */
 class ContentController extends AbstractController
 {
-    public function getBoulNameById($id) {
-        $client = new \GuzzleHttp\Client();
-        $response = $client->get("https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/boulangeries/ById/".$id);
-
-        $status =$response->getStatusCode();
-        $response = $response->getBody()->getContents();
-        $Object=json_decode($response);
-
-        return $Object->nomBL;
-    }
+//    public function getBoulNameById($id) {
+//        $client = new \GuzzleHttp\Client();
+//        $response = $client->get("https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/boulangeries/ById/".$id);
+//
+//        $status =$response->getStatusCode();
+//        $response = $response->getBody()->getContents();
+//        $Object=json_decode($response);
+//
+//        return $Object->nomBL;
+//    }
 
 
 
@@ -44,18 +50,24 @@ class ContentController extends AbstractController
     public function hist(){
 
         $client = new \GuzzleHttp\Client();
-
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/commandesBL/getCmdsByEtat?etat="honoree"');
+        $response = $client->get('https://boulang.ml/commandesBL/getCmdsByEtat?etat=honor%C3%A9e');
 
         $status =$response->getStatusCode();
 
         $response = $response->getBody()->getContents();
-        $commande= (array)(json_decode($response));
-        $commande['nomBL'] =  $this->getBoulNameById( $commande['idCommandeBL']);
 
-        $commandes[] = $commande;
 
-        return $this->render('content/Historique.html.twig', ['commandes'=> $commandes]);
+        $commandes = (array)(json_decode($response));
+
+        $commandesfinal= [];
+
+        foreach($commandes as $commande)
+        {
+            $commandesfinal[] = (array) $commande;
+        }
+
+
+        return $this->render('content/Historique.html.twig', ['commandes'=> $commandesfinal]);
 
     }
 

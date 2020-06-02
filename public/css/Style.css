@@ -7,10 +7,16 @@
 #acceuil{
 
     background-color: #EDF1F7 ;
+
+}
+
+.hidden{
+    overflow-y: hidden;
 }
 
 .origin{
     text-align: center;
+    overflow-y: auto;
 }
 
 
@@ -36,9 +42,8 @@
     display: inline-block;
 }
 
-/*the block coming next is reserved for authentification update*/
 
-/*
+
 .maPainInTheS:hover:before{
     content: attr(alt);
     border: 1px solid darkgrey;
@@ -53,7 +58,7 @@
     width: 15em;
     background-color:ghostwhite;
 
-}*/
+}
 
 .loginbox{
 
@@ -196,18 +201,28 @@ a:hover{
     font-family: Arial,sans-serif;
     text-decoration: none;
     font-size: 1.1em;
-    padding: 2em;
+    padding: 3em;
     min-height:fit-content;
-    width: 280px;
+    min-width: 280px;
     background-color: white;
     box-shadow: 8px 0px 10px #E8E3E3;
     padding-left: 0px;
 }
 
+div.wrapper .container-fluid{
+
+    height: 100vh;
+    overflow: scroll;
+    position: relative;
+    margin-top: 4em;
+    padding-bottom: 2em;
+}
+
 .sidebarShrink{
     min-height: fit-content;
     padding: 2em;
-    width: 60px;
+    min-width: 60px;
+    width:60px;
     background-color:white;
     box-shadow: 8px 0px 10px #E8E3E3;
     padding-left: 0px;
@@ -247,7 +262,7 @@ footer{
     background-color: white;
     box-shadow: 0px 2px 4px #E8E3E3;
     z-index: 2;
-    min-height:10%;
+    min-height:5%;
 }
 
 .newRow{
@@ -270,6 +285,7 @@ footer{
 .tableZone{
     background-color: white;
     box-shadow: 0px 1px 5px darkgrey;
+    margin-bottom: 5em;
 
 
 }

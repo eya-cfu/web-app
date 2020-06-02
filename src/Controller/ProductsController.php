@@ -11,12 +11,43 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class ProductsController
+ * @package App\Controller
+ * @Route("/content")
+ */
+
+/*this whole part is missing a lot of shit due to server prblms*/
+
 class ProductsController extends AbstractController
 {
+    public function getCount(){
+        $client = new \GuzzleHttp\Client();
+
+        try{
+            $response = $client->get('https://boulang.ml/produits/CountAll/getCount');
+            $status =$response->getStatusCode();
+            if($status >= 200 && $status<300 )
+            {
+                $response = $response->getBody()->getContents();
+                $count = (array)(json_decode($response));
+                return $count['count'];
+
+            }
+        }catch(\GuzzleHttp\Exception\RequestException $e){
+           return -1;
+        }
+
+
+
+
+    }
+
+
     public function getProduitByCodeProduit($codeProduit){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/produits/'.$codeProduit);
+        $response = $client->get('https://boulang.ml/produits/'.$codeProduit);
         $status =$response->getStatusCode();
 
         $response = $response->getBody()->getContents();
@@ -29,7 +60,7 @@ class ProductsController extends AbstractController
     public function postComposant($ComposantJson){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/composants', [
+        $response = $client->request('POST', 'https://boulang.ml/composants', [
             'body' => $ComposantJson
         ]);
 
@@ -39,22 +70,31 @@ class ProductsController extends AbstractController
     }
 
 
+
     public function postComposition($CompositionJson){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/compositionsProduit', [
+
+        try{ $response = $client->request('POST', 'https://boulang.ml/compositionsProduit', [
             'body' => $CompositionJson
         ]);
 
-        $status =$response->getStatusCode();
-        return $status;
+            $status =$response->getStatusCode();
+            return $status;
+        }catch(\GuzzleHttp\Exception\RequestException $e){
+
+            return 500;
+
+        }
+
+
     }
 
     public function getComposants(){
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/composants');
+        $response = $client->get('https://boulang.ml/composants');
         $status =$response->getStatusCode();
 
         $response = $response->getBody()->getContents();
@@ -77,25 +117,26 @@ class ProductsController extends AbstractController
     public function getComposantProduit($codeProduit){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/compositionsProduit');
+        $response = $client->get('https://boulang.ml/compositionsProduit');
         $status =$response->getStatusCode();
 
         $response = $response->getBody()->getContents();
 
         $Allcompositions = (array)(json_decode($response));
 
+
         $compositions = array();
 
         foreach($Allcompositions as $ac)
         {
             $ac = (array) $ac;
+
             if( $ac['codeProduit'] == $codeProduit )
 
             {
                 array_shift($ac);
-                array_shift($ac);
 
-                $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/composants/'. $ac['idComposant']);
+                $response = $client->get('https://boulang.ml/composants/'. $ac['idComposant']);
 
                 $response  = $response->getBody()->getContents();
 
@@ -116,7 +157,7 @@ class ProductsController extends AbstractController
     public function putProduct($ProductJson , $codeProduit){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('PUT', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/produits/'. $codeProduit,
+        $response = $client->request('PUT', 'https://boulang.ml/produits/'. $codeProduit,
             [
                 'body' => $ProductJson
             ]);
@@ -130,7 +171,7 @@ class ProductsController extends AbstractController
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/produits');
+        $response = $client->get('https://boulang.ml/produits');
 
         $status =$response->getStatusCode();
 
@@ -150,9 +191,48 @@ class ProductsController extends AbstractController
         return $finalProducts;
     }
 
+    /**
+     * @Route("/Products/post/{designation}/{TVA}/{HA}" , name="post.product")
+     */
+
+    public function ajaxdidntwannadoit(Request $request, $designation, $TVA, $HA){
+        $client = new \GuzzleHttp\Client();
+        if($request->isXmlHttpRequest()) {
+//            $produitJson = $request->getContent();
+
+            $produit = [    'libelle'=>$designation,
+                            'prixHA'=> $HA,
+                            'TVA' => $TVA,
+                            'prixTTC'=> $TVA+$HA
+                          ];
+
+            $theLastOfus = $this->getCount()+1000;
+            $lastProduct = $this->getProduitByCodeProduit($theLastOfus);
+            if( $lastProduct['libelle'] != $designation )
+            {
+                $produitJson=json_encode($produit);
+
+                $response = $client->request('POST', 'https://boulang.ml/produits', [
+                    'body' => $produitJson
+                ]);
+
+                $status =$response->getStatusCode();
+
+                if($status >= 201 && $status < 300)
+                    return $this->json(['code'=> 200 , 'message'=> 'produit posted', 'composant'=> $produitJson], 200);
+                else
+                    return $this->json(['code'=> 200 , 'message'=> 'produit existe déja'], 400);
+
+             }else
+
+                return $this->json(['code'=> 200 , 'message'=> 'produit existe déja'], 400);
+
+
+
+    }}
 
     /**
-     * @Route("/content/Products", name="products")
+     * @Route("/Products", name="products")
      */
     public function products()
     {
@@ -170,10 +250,12 @@ class ProductsController extends AbstractController
 
     public function delete(Request $request, $codeProduit) : Response{
         $client = new \GuzzleHttp\Client();
-        $response = $client->delete('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/produits/'.$codeProduit);
+        $response = $client->delete('https://boulang.ml/produits/'.$codeProduit);
 
-        if($response->getStatusCode() == 200);
-        return $this->json(['code' => 200 , 'message' => 'Produit supprimé avec succes'] , 200);
+        if(($response->getStatusCode() >= 200) && ($response->getStatusCode() < 300))
+            return $this->json(['code' => 200 , 'message' => 'Produit supprimée avec succes'] , 200);
+        else
+            return $this->json(['code' => $response->getStatusCode() , 'message' => 'oops'] , 500);
 
 
     }
@@ -229,7 +311,8 @@ class ProductsController extends AbstractController
 
        $composants = $this->getComposantProduit($codeProduit);
 
-
+       dump($composants);
+       dump($nomProduit);
         return $this->render('modals/compositions.html.twig',[
             'codeProduit'=> $codeProduit ,
             'composants' => $composants,
@@ -252,10 +335,14 @@ class ProductsController extends AbstractController
 
         $composants = $this->getComposantProduit($codeProduit);
 
-        $composants['nomProduit']= $nomProduit;
+      //  dump($composants);
+
+
 
         $html = $this->renderView('modals/compositions.html.twig',[
-            'codeProduit'=> $codeProduit , 'composants' => $composants]
+            'codeProduit'=> $codeProduit ,
+            'composants' => $composants ,
+            'nomProduit'=>$nomProduit]
         );
 
         $dompdf->loadHtml($html);
@@ -264,9 +351,13 @@ class ProductsController extends AbstractController
 
         $dompdf->render();
 
-        $dompdf->stream("mypdf.pdf", [
+        return new Response($dompdf->stream("mypdf.pdf", [
             "Attachment" => true
-        ]);
+        ]));
+
+//        $dompdf->stream("mypdf.pdf", [
+//            "Attachment" => true
+//        ]);
 
 
     }
@@ -276,7 +367,7 @@ class ProductsController extends AbstractController
     public function addcomposant($codeProduit,$Produit)
     {
 
-        dump($Produit);
+        dump($codeProduit);
        $composants =  $this->getComposants();
         return $this->render("content/addComposant.html.twig",[
             'codeProduit'=> $codeProduit ,
@@ -326,15 +417,20 @@ class ProductsController extends AbstractController
 
                 $Composition = [
                     'idComposition' => null ,
-                    'codeProduit' => $codeProduit ,
-                    'idComposant' => $myarray[$i]['idComposant'] ,
+                    'codeProduit' => [strval($codeProduit)] ,
+                    'idComposant' => [$myarray[$i]['idComposant']] ,
                     'quantiteComp' => $myarray[$i]['quantiteComp']
                 ];
 
-                $Composition = json_encode($Composition);
+                $serializer = $this->container->get('serializer');
+                $Composition = $serializer->serialize($Composition, 'json');
+
+
                 $status= $this->postComposition($Composition);
+                dump($status);
             }
-            return $this->json(['code'=> 200 , 'message'=> 'compositions posted','myarray'=>$myarray], 200);
+
+            return $this->json(['code'=> 200 , 'message'=> 'compositions posted','myarray'=>$Composition], 200);
         }
 
             return $this->json(['code'=> 200 , 'message'=> 'prblm :('], 200);
@@ -357,9 +453,11 @@ class ProductsController extends AbstractController
 
         if($form->isSubmitted() and $form->isValid()){
 
-            //$codeProduit = getCount();
+            if($this->getCount() != -1)
+            $codeProduit = $this->getCount()+ 1001;
+  else
+      $codeProduit = 0;
 
-            $codeProduit = 0;
             return $this->addcomposant($codeProduit,$Produit);
 
 

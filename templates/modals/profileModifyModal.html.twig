@@ -20,12 +20,14 @@
     </div>
 
     {{ form_row(form_modify.login , { 'label' : "Login ", 'value' : credentials.login }) }}
+
+
         {{ form_row(form_modify.password, { 'label' : "Mot de passe  "  , attr : {'class' : "toggPwd"} , "value" : credentials.password })  }}
 
     <div class="form-group">
         <label>Confirmation</label>
         {{ form_widget(form_modify.confirm_password, { 'label' : "Confirmation "  , attr : {'class' : "toggPwd"} , "value" : credentials.password })}}
-        <span style="color: #88001b; display: none"> Vous n'avez pas tapé le même mot de passe! </span>
+        <span class="mdp" style="color: #88001b; display: none"> Vous n'avez pas tapé le même mot de passe! </span>
     </div>
 
 </div>
@@ -46,21 +48,7 @@
     if(  $('input[name="profile[password]"]').val() != $('input[name="profile[confirm_password]"]').val())
     {
         e.preventDefault();
-         $('span').css({'display' : ""});
-    }else {var url ="https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils/"+ {{ matricule }};
-
-        $.ajax({
-            method: 'GET',
-            url: url
-
-        }).done(function(msg){
-            console.log(msg);
-
-        }).fail(function () {
-            alert('Une erreur est survenue :(');
-             location.reload();
-        })
-
+         $('span.mdp').css({'display' : ""});
     }
 
 

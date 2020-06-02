@@ -12,7 +12,7 @@
 
 
     <!--Content-->
-    <div class="container-fluid" style="position: relative ">
+    <div class="container-fluid">
         <div class="row justify-content-end " style="margin: 2em">
             <div class="col-lg-4 col-sm-12 col-xs-12">
                 <form>
@@ -30,7 +30,7 @@
 
         <div class="row my-row justify-content-center tableZoneZone"  style="margin-bottom: 0px">
             <h3 > LES BOULANGERIES </h3> </div>
-        <div class="tableZone row justify-content-center" style="margin: 0px 2em; ">
+        <div class="tableZone row justify-content-center" style="margin-left: 2em;margin-right: 2em; ">
             <div class="col-12" style="text-align: end; margin-right: 1em">
                 <a href="{{ path('boulangerie_add')}}"> <i class="fas fa-plus addItem" ></i> </a>
             </div>
@@ -52,7 +52,7 @@
                 <tr>
 
 
-                   <th scope="row"> {{ Boulangerie.idBoulangerie }}</th>
+                   <th scope="row"> {{ Boulangerie.id_Boulangerie }}</th>
                     <td>{{ Boulangerie.nomBL }}</td>
                     <td>{{ Boulangerie.adresse }}</td>
                     <td>{{ Boulangerie.telephone }}</td>
@@ -60,15 +60,15 @@
                     <td>{{ Boulangerie.matricule}} - {{ Boulangerie.nomResponsable }}</td>
 
                     <td>
-                            <a href="#modify"
-                             type="button" class="btn btn-success Update" data-toggle="modal" data-target="{{ path('boulangerie_modify',{'id' : Boulangerie.idBoulangerie}) }}">
-                                Modifier </a>
+                            <button href="#modify"
+                             type="button" class="btn btn-success Update" data-toggle="modal" data-target="{{ path('boulangerie_modify',{'id' : Boulangerie.id_Boulangerie}) }}" >
+                                Modifier </button>
 
                     </td>
 
 
 
-                    <td><a href="{{ path('boulangerie_delete',{'id' : Boulangerie.idBoulangerie}) }}"
+                    <td><a href="{{ path('boulangerie_delete',{'id' : Boulangerie.id_Boulangerie}) }}"
                             type="button" class="btn btn-danger Remove" data-toggle="modal" data-target="#exampleModalCenter">
                             Supprimer</a></td>
                 </tr>

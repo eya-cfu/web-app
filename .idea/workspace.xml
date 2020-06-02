@@ -2,7 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40c0fd75-2e45-438e-8dc6-dd840a480bb5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Validator/LoginUnique.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Validator/LoginUniqueValidator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Authentification/login.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/JavaScript/Composants.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/JavaScript/Composants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/Style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BoulangerieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BoulangerieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ContentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ContentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/LivreurController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LivreurController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProfilesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfilesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validator/ProfileExistValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validator/ProfileExistValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validator/ToBeOrNoToBeValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validator/ToBeOrNoToBeValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validator/TrueLivreurValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validator/TrueLivreurValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content/Boulangeries.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content/Boulangeries.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content/Livreurs.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content/Livreurs.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content/Produits.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content/Produits.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content/acceuil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content/acceuil.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content/addComposant.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content/addComposant.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/content/profiles.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/content/profiles.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/navbar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/sidebar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/sidebar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/modals/BoulModifyModal.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/modals/BoulModifyModal.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/modals/profileModifyModal.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/modals/profileModifyModal.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,13 +190,16 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1b2c90FA3oLihNXAlwoI9E4WOCn" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
@@ -218,6 +247,17 @@
       <workItem from="1590344165861" duration="710000" />
       <workItem from="1590488528487" duration="4842000" />
       <workItem from="1590603492591" duration="293000" />
+      <workItem from="1590608569869" duration="50000" />
+      <workItem from="1590656889594" duration="66000" />
+      <workItem from="1590657114187" duration="1754000" />
+      <workItem from="1590669022792" duration="616000" />
+      <workItem from="1590769207779" duration="666000" />
+      <workItem from="1590841583086" duration="21728000" />
+      <workItem from="1590916849055" duration="10578000" />
+      <workItem from="1590941266465" duration="28527000" />
+      <workItem from="1591007458773" duration="5376000" />
+      <workItem from="1591022981896" duration="22075000" />
+      <workItem from="1591095210387" duration="2075000" />
     </task>
     <task id="LOCAL-00001" summary="added missing folders">
       <created>1589752956619</created>
@@ -240,10 +280,15 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="added missing folders" />
     <option name="LAST_COMMIT_MESSAGE" value="added missing folders" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590943596348">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1590943596347" />
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589495155685">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -252,10 +297,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="225" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589760581608" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1590344223684">
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1591095212137">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1590344223684" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1591095212137" />
     <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589751694186">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

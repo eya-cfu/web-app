@@ -15,7 +15,7 @@
 </head>
 
 
-<body id={% block body_id %}"acceuil"{% endblock %} class="{% block body_class %}{% endblock %}">
+<body id={% block body_id %}"acceuil"{% endblock %} class="{% block body_class %}hidden{% endblock %}">
 {% block body %}{% endblock %}
 
 
@@ -29,7 +29,32 @@
 
 <script src="{{ asset('JavaScript/search.js') }}"></script>
 {% block javascripts %}{% endblock %}
+{#<script>#}
+{#    var lastScrollvert = 0;#}
+{#    var lastScrollHor = 0;#}
+{#    $(window).scroll(function() {#}
+{#        var documentScrollvert = $(document).scrollTop();#}
+{#        if (lastScrollvert != documentScrollvert) {#}
 
+{#             $('.sideBar ul.fix-me').css("position","fixed");#}
+{#            lastScrollvert = documentScrollvert;#}
+{#        }#}
+
+{#        var documentScrollHor = $(document).scrollLeft();#}
+{#        if (lastScrollHor != documentScrollHor) {#}
+
+{#            $('.sideBar ul.fix-me').css("position","relative");#}
+{#            lastScrollHor = documentScrollHor;#}
+{#        }#}
+
+
+{#    });#}
+{#</script>#}
+<script>
+
+    $('footer').addClass('fixed-bottom');
+
+</script>
 </body>
 
 </html>

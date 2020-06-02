@@ -10,37 +10,68 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class BoulangerieController
+ * @package App\Controller
+ * @Route("/content")
+ */
 
 class BoulangerieController extends AbstractController
 {
+
+    public function  matExiste($matricule){
+        $client = new \GuzzleHttp\Client();
+
+        try{
+            $response = $client->get('https://boulang.ml/profils/'.$matricule);
+            return true;
+        }catch(\GuzzleHttp\Exception\ClientException $e){
+
+            return false;
+        }
+    }
+
+
     public function putBoulangerie($BoulJson , $id){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('PUT', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/boulangeries/ById/'. $id,
-            [
-            'body' => $BoulJson
-            ]);
 
-        $status =$response->getStatusCode();
-        return $status;
+        try{
+            $response = $client->request('PUT', 'https://boulang.ml/boulangeries/ById/'. $id,
+                [
+                    'body' => $BoulJson
+                ]);
+
+           return $response->getStatusCode();
+        }catch (\GuzzleHttp\Exception\RequestException $e){
+
+            return 500;
+        }
+
+
     }
 
     public function postBoulangerie($BoulJson){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/boulangeries', [
-            'body' => $BoulJson
-        ]);
+        try{
+            $response = $client->request('POST', 'https://boulang.ml/boulangeries', [
+                'body' => $BoulJson
+            ]);
 
-        $status =$response->getStatusCode();
-        return $status;
+            $status =$response->getStatusCode();
+            return $status;
+        }catch(\GuzzleHttp\Exception\RequestException $e){
+            return 500;
+        }
+
     }
 
     public function getBoulangerieById($id){
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/boulangeries/ById/'.$id);
+        $response = $client->get('https://boulang.ml/boulangeries/ById/'.$id);
 
         $status =$response->getStatusCode();
 
@@ -55,7 +86,7 @@ class BoulangerieController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/boulangeries');
+        $response = $client->get('https://boulang.ml/boulangeries');
 
         $status =$response->getStatusCode();
 
@@ -98,10 +129,12 @@ class BoulangerieController extends AbstractController
 
     public function delete(Request $request, $id) : Response{
         $client = new \GuzzleHttp\Client();
-        $response = $client->delete('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/boulangeries/ById/'.$id);
+        $response = $client->delete('https://boulang.ml/boulangeries/ById/'.$id);
 
-        if($response->getStatusCode() == 200);
+        if(($response->getStatusCode() >= 200) && ($response->getStatusCode() < 300))
         return $this->json(['code' => 200 , 'message' => 'Boulangerie supprimée avec succes'] , 200);
+        else
+        return $this->json(['code' => $response->getStatusCode() , 'message' => 'oops'] , 500);
 
 
     }
@@ -115,7 +148,7 @@ class BoulangerieController extends AbstractController
          $Boulangerie = new Boulangerie();
 
          $Mod = $this->getBoulangerieById($id);
-
+         $oldMatricule= $Mod['matricule'];
          $form = $this->createForm(BoulangerieType::class,$Boulangerie);
         $form->handleRequest($request);
 
@@ -126,15 +159,20 @@ class BoulangerieController extends AbstractController
 
             $Boulangerie= $Boulangerie->toArray();
             array_shift($Boulangerie);
-            $Boulangerie['idBoulangerie'] = null;
+            $Boulangerie = array('id_Boulangerie' => $id) + $Boulangerie;
 
-            if   (!($form->isValid()))
-                $Boulangerie['matricule'] = null;
+
+            if (!($this->matExiste($Boulangerie['matricule'])))
+                $Boulangerie['matricule'] = $oldMatricule;
+
 
             $serializer = $this->container->get('serializer');
             $Boulangerie = $serializer->serialize($Boulangerie, 'json');
 
-             $status = $this->putBoulangerie($Boulangerie,$id);
+
+            dump($Boulangerie);
+
+            $status = $this->putBoulangerie($Boulangerie,$id);
 
 
              return $this->redirectToRoute('boulangeries');
@@ -151,6 +189,7 @@ class BoulangerieController extends AbstractController
 
     }
 
+    /*add Boul not done yet*/
 
     /**
      * @Route("/Boulangeries/add" , name="boulangerie_add")
@@ -177,7 +216,7 @@ class BoulangerieController extends AbstractController
             dump($boulangerie);
             $status =  $this->postBoulangerie($boulangerie);
 
-            if($status == 201)
+            if($status >= 200 && $status<300)
             {
                 echo '<script language="javascript">';
                 echo 'alert("Boulangerie ajoutée avec succes")';

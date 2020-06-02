@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Livreur;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 use GuzzleHttp\Client;
@@ -11,15 +12,68 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class ProfilesController
+ * @package App\Controller
+ * @Route("/content")
+ */
+
 class ProfilesController extends AbstractController
 {
+    public function logExiste($login){
+
+        $client = new \GuzzleHttp\Client();
+        try{
+            $response = $client->get('https://boulang.ml/profils/Login/'.$login);
+
+            $status =$response->getStatusCode();
+
+            return true;
+        }catch (\GuzzleHttp\Exception\RequestException $e)
+        {
+            return false;
+        }
+    }
+
+    public function putProfile($profileJson, $matricule){
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+            $response = $client->request('PUT', 'https://boulang.ml/profils/'. $matricule,
+                [
+                    'body' => $profileJson
+                ]);
+
+            return $response->getStatusCode();
+        }catch (\GuzzleHttp\Exception\RequestException $e){
+
+            return 500;
+        }
+
+    }
+
+    public function postLivreur($LivreurJson){
+
+        $client = new \GuzzleHttp\Client();
+
+        try{
+            $response = $client->request('POST', 'https://boulang.ml/livreurs', [
+                'body' => $LivreurJson
+            ]);
+
+            $status =$response->getStatusCode();
+            return $status;
+        }catch(\GuzzleHttp\Exception\RequestException $e){ return 500; }
+
+    }
 
     public function getCredentials($matricule){
 
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils/'.$matricule);
+        $response = $client->get('https://boulang.ml/profils/'.$matricule);
 
         $status =$response->getStatusCode();
 
@@ -38,20 +92,39 @@ class ProfilesController extends AbstractController
     public function postProfile($ProfileJson){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils', [
-            'body' => $ProfileJson
-        ]);
 
-        $status =$response->getStatusCode();
-        return $status;
+        try{
+            $response = $client->request('POST', 'https://boulang.ml/profils', [
+                'body' => $ProfileJson
+            ]);
+
+            $status =$response->getStatusCode();
+            return $status;
+        }catch (\GuzzleHttp\Exception\RequestException $e){
+            return 500;
+        }
+
     }
+
+    public function deletefun($matricule){
+
+        $client = new \GuzzleHttp\Client();
+        try{
+            $response = $client->delete('https://boulang.ml/profils/'.$matricule);
+            $status = $response->getStatusCode() ;
+            return $status;
+         }catch(\GuzzleHttp\Exception\RequestException $e){
+            return 500;
+        }
+
+        }
 
     public function getProfiles(){
 
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils');
+        $response = $client->get('https://boulang.ml/profils');
 
         $status =$response->getStatusCode();
 
@@ -88,15 +161,20 @@ class ProfilesController extends AbstractController
      */
 
     public function delete(Request $request, $matricule) : Response{
-        $client = new \GuzzleHttp\Client();
-        $response = $client->delete('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils/'.$matricule);
 
-        if($response->getStatusCode() == 200);
-        return $this->json(['code' => 200 , 'message' => 'Profil supprimé avec succes'] , 200);
+       $status = $this->deletefun($matricule);
+
+       if($status>=200 && $status<300)
+            return $this->json(['code' => 200 , 'message' => 'Profil supprimé avec succes'] , 200);
+
+       else
+            return $this->json(['code' => $status , 'message' => 'oops'] , $status);
 
 
     }
 
+    /*lost case*/
+   /*delete a profile from profiles and boom u still can get it by id */
     /**
      * @Route("/Profiles/modify/{matricule}" , name="profile_modify")
      */
@@ -107,6 +185,8 @@ class ProfilesController extends AbstractController
 
         $Cred = $this->getCredentials($matricule);
 
+        $login = $Cred['login'];
+
         $form = $this->createForm(ProfileType::class,$Profile);
 
         $form->handleRequest($request);
@@ -115,10 +195,13 @@ class ProfilesController extends AbstractController
             $Profile = $Profile->toArray();
             array_shift($Profile);
             array_pop($Profile);
+            if($this->logExiste($Profile['login']))
+                $Profile['login'] = $login;
+
             $serializer = $this->container->get('serializer');
             $Profile = $serializer->serialize($Profile, 'json');
 
-            $status = $this->postProfile($Profile);
+            $status = $this->putProfile($Profile, $matricule);
 
            return $this->redirectToRoute('profiles');
 
@@ -138,7 +221,7 @@ class ProfilesController extends AbstractController
     public function add(Request $request){
 
         $Profile = new Profile();
-
+   $isLivreur = false;
 
         $form= $this->createForm(ProfileType::class, $Profile);
 
@@ -146,17 +229,32 @@ class ProfilesController extends AbstractController
 
         if($form->isSubmitted() and $form->isValid()){
 
+            $Livreur = new Livreur();
             $Profile = $Profile->toArray();
             array_shift($Profile);
             array_pop($Profile);
             $serializer = $this->container->get('serializer');
+            if($Profile['affectation'] = 'Livreur')
+            {
+                $isLivreur = true;
+
+                $Livreur->setMatricule($Profile['matricule']);
+                $Livreur->setTeleLivreur(1);
+                $Livreur->setNumVehicule('0000');
+                $Livreur = $Livreur->toArray();
+                array_shift($Livreur);
+                $Livreur = $serializer->serialize($Livreur, 'json');
+            }
+
             $Profile = $serializer->serialize($Profile, 'json');
 
-            dump($Profile);
-
              $status =  $this->postProfile($Profile);
+            if($isLivreur)
+            {    dump($Livreur);
+                $status = $this->postLivreur($Livreur);
+            }
 
-             if($status == 201)
+             if($status>= 200 && $status<300)
              {
                  echo '<script language="javascript">';
                  echo 'alert("Profil ajouté avec succes")';

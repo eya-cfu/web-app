@@ -1,8 +1,8 @@
 {% set currentPath =  app.request.attributes.get('_route') %}
 
 <div class="sideBar">
-    <ul class="list-unstyled"  >
-        <li id="active">
+    <ul class="list-unstyled fix-me" style="position: relative;" >
+        <li id="active" style="margin-top: 2em;">
             <div class="component ">
                 <a href="{{ path('content') }}" {% if currentPath == "content" or currentPath == "historique" %} style="color: #007bff" {% endif %}>
                     <i class="fas fa-home icon"> </i>  <span class="hideable">Acceuil</span> </a>
@@ -33,9 +33,9 @@
         </li>
 
 
-        <!--the block coming next is reserved for authentification update-->
+        <!--the commented block below reserved for authentification update-->
 
-        <!--  <hr  id="mSpecialBar">
+          <hr  id="mSpecialBar">
 
         <li>
 
@@ -49,22 +49,22 @@
             </div>
 
             <ul class="list-unstyled collapse" id="authSubmenu">
-                <hr class="hideable">
+             <!--   <hr class="hideable">
                 <li>
                     <a class="OpA" href="#" data-toggle="modal" data-target="#ChangerMdp"> Changer le mot de passe </a>
                 </li>
                 <hr class="hideable">
                 <li>
                     <a class="OpA" href="#" > s'inscrire  </a>
-                </li>
+                </li>-->
 
                 <hr class="hideable">
                 <li>
-                    <a class="OpA" href="#" > se déconnecter  </a>
+                    <a class="OpA" href="{{ path('security') }}" > se déconnecter  </a>
                 </li>
             </ul>
 
-        </li>-->
+        </li>
 
     </ul>
 

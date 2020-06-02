@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class LivreurController
+ * @package App\Controller
+ * @Route("/content")
+ */
+
 class LivreurController extends AbstractController
 {
 
@@ -18,7 +24,7 @@ class LivreurController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/livreurs/'.$matricule);
+        $response = $client->get('https://boulang.ml/livreurs/'.$matricule);
 
         $status =$response->getStatusCode();
 
@@ -33,32 +39,28 @@ class LivreurController extends AbstractController
     public function putLivreur($LivreurJson , $matricule){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('PUT', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/livreurs/'. $matricule,
-            [
-                'body' => $LivreurJson
-            ]);
 
-        $status =$response->getStatusCode();
-        return $status;
+       try{
+           $response = $client->request('PUT', 'https://boulang.ml/livreurs/'. $matricule,
+               [
+                   'body' => $LivreurJson
+               ]);
+
+           $status =$response->getStatusCode();
+           return $status;
+       }catch (\GuzzleHttp\Exception\RequestException $e){
+           return 500;
+       }
+
     }
 
 
-    public function postLivreur($LivreurJson){
-
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/livreurs', [
-            'body' => $LivreurJson
-        ]);
-
-        $status =$response->getStatusCode();
-        return $status;
-    }
     public function getLivreurs(){
 
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/livreurs');
+        $response = $client->get('https://boulang.ml/livreurs');
 
         $status =$response->getStatusCode();
 
@@ -93,50 +95,6 @@ class LivreurController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Livreurs/add" , name="livreur_add")
-     */
-
-    public function add(Request $request){
-
-        $Livreur = new Livreur();
-
-
-        $form= $this->createForm(LivreurType::class, $Livreur);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() and $form->isValid()){
-
-
-            $Livreur= $Livreur->toArray();
-          array_shift($Livreur);
-            $serializer = $this->container->get('serializer');
-            $Livreur = $serializer->serialize($Livreur, 'json');
-             dump($Livreur);
-            $status =  $this->postLivreur($Livreur);
-
-            if($status == 201)
-            {
-                echo '<script language="javascript">';
-                echo 'alert("Livreur ajouté avec succes")';
-                echo '</script>';
-            }
-            else{
-                echo '<script language="javascript">';
-                echo 'alert("Oops! une erreur s\'est produite, réessayez plus tard")';
-                echo '</script>';
-            }
-
-
-            $Livreur = new Livreur();
-            $form= $this->createForm(LivreurType::class, $Livreur);
-            $this->redirectToRoute($request->attributes->get('_route'));
-
-        }
-
-        return $this->render("content/addLivreur.html.twig", ['form_Livreur' => $form->createView()]);
-    }
 
     /**
      * @Route("/Livreurs/delete/{matricule}", name="livreur_delete")
@@ -144,12 +102,15 @@ class LivreurController extends AbstractController
 
     public function delete(Request $request, $matricule) : Response{
         $client = new \GuzzleHttp\Client();
-        $response = $client->delete('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/livreurs/'.$matricule);
-        $responsePro = $client->delete('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils/'.$matricule);
 
-        if($response->getStatusCode() == 200  &&  $responsePro->getStatusCode() == 200);
-        return $this->json(['code' => 200 , 'message' => 'Livreur supprimé avec succes'] , 200);
+        try {
+            $response = $client->delete('https://boulang.ml/livreurs/' . $matricule);
+            return $this->json(['code' => 200 , 'message' => 'Livreur supprimé avec succes'] , 200);
 
+        }catch(\GuzzleHttp\Exception\RequestException $e){
+            return $this->json(['code' => 200 , 'message' => 'requete echouée :('] , 500);
+
+        }
 
     }
 
@@ -172,6 +133,8 @@ class LivreurController extends AbstractController
            array_shift($Livreur);
             $serializer = $this->container->get('serializer');
             $Livreur = $serializer->serialize($Livreur, 'json');
+
+            dump($Livreur);
 
             $status = $this->putLivreur($Livreur,$matricule);
 

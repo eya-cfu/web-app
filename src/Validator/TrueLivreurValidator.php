@@ -16,19 +16,21 @@ class TrueLivreurValidator extends ConstraintValidator
         }
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils/'.$value);
+        try{
+            $response = $client->get('https://boulang.ml/profils/'.$value);
 
-        $status =$response->getStatusCode();
+            $status =$response->getStatusCode();
 
+            if($status >= 200 && $status<300)
+            {$response = $response->getBody()->getContents();
+                $profil= (array)(json_decode($response));
 
-        if($status != 404)
-        {
-            $response = $response->getBody()->getContents();
-            $profil= (array)(json_decode($response));
+                if ($profil['affectation'] == 'Livreur' || $profil['affectation'] == '' || $profil['affectation'] == 'livreur' )
+                    return;
+            }
 
-            if ($profil['affectation'] == 'Livreur' || $profil['affectation'] == '' )
-                return;
-        }
+        }catch (\GuzzleHttp\Exception\RequestException $e) {}
+
 
         $this->context->buildViolation($constraint->message)
             ->setParameter('{{ value }}', $value)

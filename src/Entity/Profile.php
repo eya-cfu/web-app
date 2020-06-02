@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Validator\ProfileExist;
+use App\Validator\LoginUnique;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -41,6 +42,7 @@ class Profile
     private $affectation;
 
     /**
+     * @LoginUnique()
      * @Assert\NotBlank
      * @ORM\Column(type="string", length=50)
      */

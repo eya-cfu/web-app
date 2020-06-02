@@ -11,12 +11,18 @@ class ProfileExistValidator extends ConstraintValidator
     {
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/profils/'.$value);
+        try{
+            $response = $client->get('https://boulang.ml/profils/'.$value);
 
-        $status =$response->getStatusCode();
+            $status =$response->getStatusCode();
 
-        if($status != 200)
+        }catch (\GuzzleHttp\Exception\RequestException $e)
+        {
             return;
+        }
+
+
+
 
         /* @var $constraint \App\Validator\ProfileExist */
 
