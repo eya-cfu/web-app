@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
@@ -13,8 +14,25 @@ class SecurityController extends AbstractController
     /**
      * @Route("/", name="security")
      */
-    public function index()
+    public function index(AuthenticationUtils $authenticationUtils)
     {
-        return $this->render('Authentification/login.html.twig');
+        if($this->getUser())
+        {
+           return $this->redirectToRoute('content');
+        }
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        return $this->render('Authentification/login.html.twig', [
+            'error'=> $error
+        ]);
+    }
+
+    /**
+     * @Route("/deconnexion" , name="deconnexion")
+     */
+
+    public function deconnecter(){
+
     }
 }
