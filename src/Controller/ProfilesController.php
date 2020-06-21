@@ -234,7 +234,7 @@ class ProfilesController extends AbstractController
             array_shift($Profile);
             array_pop($Profile);
             $serializer = $this->container->get('serializer');
-            if($Profile['affectation'] = 'Livreur')
+            if($Profile['affectation'] == 'Livreur')
             {
                 $isLivreur = true;
 
@@ -250,7 +250,7 @@ class ProfilesController extends AbstractController
 
              $status =  $this->postProfile($Profile);
             if($isLivreur)
-            {    dump($Livreur);
+            {
                 $status = $this->postLivreur($Livreur);
             }
 

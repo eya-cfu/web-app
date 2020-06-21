@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40c0fd75-2e45-438e-8dc6-dd840a480bb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Authentification/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Authentification/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/navbar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/sidebar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/sidebar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProfilesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfilesController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +234,9 @@
       <workItem from="1591022981896" duration="22075000" />
       <workItem from="1591095210387" duration="3245000" />
       <workItem from="1591198631085" duration="1886000" />
-      <workItem from="1591216448842" duration="7280000" />
+      <workItem from="1591216448842" duration="8736000" />
+      <workItem from="1591520461829" duration="617000" />
+      <workItem from="1592756171832" duration="482000" />
     </task>
     <task id="LOCAL-00001" summary="added missing folders">
       <created>1589752956619</created>
@@ -280,10 +276,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="225" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589760581608" />
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1591216468644">
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1592756176621">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1591216468644" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592756176621" />
     <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589751694186">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

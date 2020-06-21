@@ -311,8 +311,8 @@ class ProductsController extends AbstractController
 
        $composants = $this->getComposantProduit($codeProduit);
 
-       dump($composants);
-       dump($nomProduit);
+//       dump($composants);
+//       dump($nomProduit);
         return $this->render('modals/compositions.html.twig',[
             'codeProduit'=> $codeProduit ,
             'composants' => $composants,
@@ -367,7 +367,7 @@ class ProductsController extends AbstractController
     public function addcomposant($codeProduit,$Produit)
     {
 
-        dump($codeProduit);
+//        dump($codeProduit);
        $composants =  $this->getComposants();
         return $this->render("content/addComposant.html.twig",[
             'codeProduit'=> $codeProduit ,
@@ -427,7 +427,7 @@ class ProductsController extends AbstractController
 
 
                 $status= $this->postComposition($Composition);
-                dump($status);
+//                dump($status);
             }
 
             return $this->json(['code'=> 200 , 'message'=> 'compositions posted','myarray'=>$Composition], 200);
