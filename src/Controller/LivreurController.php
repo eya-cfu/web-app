@@ -134,7 +134,7 @@ class LivreurController extends AbstractController
             $serializer = $this->container->get('serializer');
             $Livreur = $serializer->serialize($Livreur, 'json');
 
-            dump($Livreur);
+//            dump($Livreur);
 
             $status = $this->putLivreur($Livreur,$matricule);
 

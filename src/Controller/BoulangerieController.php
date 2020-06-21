@@ -170,7 +170,7 @@ class BoulangerieController extends AbstractController
             $Boulangerie = $serializer->serialize($Boulangerie, 'json');
 
 
-            dump($Boulangerie);
+//            dump($Boulangerie);
 
             $status = $this->putBoulangerie($Boulangerie,$id);
 
