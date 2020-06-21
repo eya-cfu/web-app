@@ -13,7 +13,7 @@ security:
         in_memory:
             memory:
                 users:
-                    khalid.berrouha@gmail.com :
+                    khaled.berrouha@gmail.com :
                         password: mypassword99
                         roles: ROLE_ADMIN
 
