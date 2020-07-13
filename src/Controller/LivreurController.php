@@ -24,7 +24,7 @@ class LivreurController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://boulang.ml/livreurs/'.$matricule);
+        $response = $client->get('https://app.167-172-50-144.plesk.page/livreurs/'.$matricule);
 
         $status =$response->getStatusCode();
 
@@ -41,7 +41,7 @@ class LivreurController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
        try{
-           $response = $client->request('PUT', 'https://boulang.ml/livreurs/'. $matricule,
+           $response = $client->request('PUT', 'https://app.167-172-50-144.plesk.page/livreurs/'. $matricule,
                [
                    'body' => $LivreurJson
                ]);
@@ -60,7 +60,7 @@ class LivreurController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://boulang.ml/livreurs');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/livreurs');
 
         $status =$response->getStatusCode();
 
@@ -104,7 +104,7 @@ class LivreurController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
         try {
-            $response = $client->delete('https://boulang.ml/livreurs/' . $matricule);
+            $response = $client->delete('https://app.167-172-50-144.plesk.page/livreurs/' . $matricule);
             return $this->json(['code' => 200 , 'message' => 'Livreur supprimé avec succes'] , 200);
 
         }catch(\GuzzleHttp\Exception\RequestException $e){

@@ -25,7 +25,7 @@ class ProductsController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
         try{
-            $response = $client->get('https://boulang.ml/produits/CountAll/getCount');
+            $response = $client->get('https://app.167-172-50-144.plesk.page/produits/CountAll/getCount');
             $status =$response->getStatusCode();
             if($status >= 200 && $status<300 )
             {
@@ -47,7 +47,7 @@ class ProductsController extends AbstractController
     public function getProduitByCodeProduit($codeProduit){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://boulang.ml/produits/'.$codeProduit);
+        $response = $client->get('https://app.167-172-50-144.plesk.page/produits/'.$codeProduit);
         $status =$response->getStatusCode();
 
         $response = $response->getBody()->getContents();
@@ -60,7 +60,7 @@ class ProductsController extends AbstractController
     public function postComposant($ComposantJson){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('POST', 'https://boulang.ml/composants', [
+        $response = $client->request('POST', 'https://app.167-172-50-144.plesk.page/composants', [
             'body' => $ComposantJson
         ]);
 
@@ -75,7 +75,7 @@ class ProductsController extends AbstractController
 
         $client = new \GuzzleHttp\Client();
 
-        try{ $response = $client->request('POST', 'https://boulang.ml/compositionsProduit', [
+        try{ $response = $client->request('POST', 'https://app.167-172-50-144.plesk.page/compositionsProduit', [
             'body' => $CompositionJson
         ]);
 
@@ -94,7 +94,7 @@ class ProductsController extends AbstractController
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://boulang.ml/composants');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/composants');
         $status =$response->getStatusCode();
 
         $response = $response->getBody()->getContents();
@@ -117,7 +117,7 @@ class ProductsController extends AbstractController
     public function getComposantProduit($codeProduit){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://boulang.ml/compositionsProduit');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/compositionsProduit');
         $status =$response->getStatusCode();
 
         $response = $response->getBody()->getContents();
@@ -136,7 +136,7 @@ class ProductsController extends AbstractController
             {
                 array_shift($ac);
 
-                $response = $client->get('https://boulang.ml/composants/'. $ac['idComposant']);
+                $response = $client->get('https://app.167-172-50-144.plesk.page/composants/'. $ac['idComposant']);
 
                 $response  = $response->getBody()->getContents();
 
@@ -157,7 +157,7 @@ class ProductsController extends AbstractController
     public function putProduct($ProductJson , $codeProduit){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('PUT', 'https://boulang.ml/produits/'. $codeProduit,
+        $response = $client->request('PUT', 'https://app.167-172-50-144.plesk.page/produits/'. $codeProduit,
             [
                 'body' => $ProductJson
             ]);
@@ -171,7 +171,7 @@ class ProductsController extends AbstractController
 
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://boulang.ml/produits');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/produits');
 
         $status =$response->getStatusCode();
 
@@ -212,7 +212,7 @@ class ProductsController extends AbstractController
             {
                 $produitJson=json_encode($produit);
 
-                $response = $client->request('POST', 'https://boulang.ml/produits', [
+                $response = $client->request('POST', 'https://app.167-172-50-144.plesk.page/produits', [
                     'body' => $produitJson
                 ]);
 
@@ -250,7 +250,7 @@ class ProductsController extends AbstractController
 
     public function delete(Request $request, $codeProduit) : Response{
         $client = new \GuzzleHttp\Client();
-        $response = $client->delete('https://boulang.ml/produits/'.$codeProduit);
+        $response = $client->delete('https://app.167-172-50-144.plesk.page/produits/'.$codeProduit);
 
         if(($response->getStatusCode() >= 200) && ($response->getStatusCode() < 300))
             return $this->json(['code' => 200 , 'message' => 'Produit supprimée avec succes'] , 200);

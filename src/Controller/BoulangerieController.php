@@ -23,7 +23,7 @@ class BoulangerieController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
         try{
-            $response = $client->get('https://boulang.ml/profils/'.$matricule);
+            $response = $client->get('https://app.167-172-50-144.plesk.page/profils/'.$matricule);
             return true;
         }catch(\GuzzleHttp\Exception\ClientException $e){
 
@@ -37,7 +37,7 @@ class BoulangerieController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
         try{
-            $response = $client->request('PUT', 'https://boulang.ml/boulangeries/ById/'. $id,
+            $response = $client->request('PUT', 'https://app.167-172-50-144.plesk.page/boulangeries/ById/'. $id,
                 [
                     'body' => $BoulJson
                 ]);
@@ -55,7 +55,7 @@ class BoulangerieController extends AbstractController
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->request('POST', 'https://boulang.ml/boulangeries', [
+            $response = $client->request('POST', 'https://app.167-172-50-144.plesk.page/boulangeries', [
                 'body' => $BoulJson
             ]);
 
@@ -71,7 +71,7 @@ class BoulangerieController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://boulang.ml/boulangeries/ById/'.$id);
+        $response = $client->get('https://app.167-172-50-144.plesk.page/boulangeries/ById/'.$id);
 
         $status =$response->getStatusCode();
 
@@ -86,7 +86,7 @@ class BoulangerieController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://boulang.ml/boulangeries');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/boulangeries');
 
         $status =$response->getStatusCode();
 
@@ -129,7 +129,7 @@ class BoulangerieController extends AbstractController
 
     public function delete(Request $request, $id) : Response{
         $client = new \GuzzleHttp\Client();
-        $response = $client->delete('https://boulang.ml/boulangeries/ById/'.$id);
+        $response = $client->delete('https://app.167-172-50-144.plesk.page/boulangeries/ById/'.$id);
 
         if(($response->getStatusCode() >= 200) && ($response->getStatusCode() < 300))
         return $this->json(['code' => 200 , 'message' => 'Boulangerie supprimée avec succes'] , 200);

@@ -24,7 +24,7 @@ class ProfilesController extends AbstractController
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->get('https://boulang.ml/profils/Login/'.$login);
+            $response = $client->get('https://app.167-172-50-144.plesk.page/profils/Login/'.$login);
 
             $status =$response->getStatusCode();
 
@@ -40,7 +40,7 @@ class ProfilesController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
         try{
-            $response = $client->request('PUT', 'https://boulang.ml/profils/'. $matricule,
+            $response = $client->request('PUT', 'https://app.167-172-50-144.plesk.page/profils/'. $matricule,
                 [
                     'body' => $profileJson
                 ]);
@@ -58,7 +58,7 @@ class ProfilesController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
         try{
-            $response = $client->request('POST', 'https://boulang.ml/livreurs', [
+            $response = $client->request('POST', 'https://app.167-172-50-144.plesk.page/livreurs', [
                 'body' => $LivreurJson
             ]);
 
@@ -73,7 +73,7 @@ class ProfilesController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://boulang.ml/profils/'.$matricule);
+        $response = $client->get('https://app.167-172-50-144.plesk.page/profils/'.$matricule);
 
         $status =$response->getStatusCode();
 
@@ -94,7 +94,7 @@ class ProfilesController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
         try{
-            $response = $client->request('POST', 'https://boulang.ml/profils', [
+            $response = $client->request('POST', 'https://app.167-172-50-144.plesk.page/profils', [
                 'body' => $ProfileJson
             ]);
 
@@ -110,7 +110,7 @@ class ProfilesController extends AbstractController
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->delete('https://boulang.ml/profils/'.$matricule);
+            $response = $client->delete('https://app.167-172-50-144.plesk.page/profils/'.$matricule);
             $status = $response->getStatusCode() ;
             return $status;
          }catch(\GuzzleHttp\Exception\RequestException $e){
@@ -124,7 +124,7 @@ class ProfilesController extends AbstractController
         $client = new \GuzzleHttp\Client();
 
 
-        $response = $client->get('https://boulang.ml/profils');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/profils');
 
         $status =$response->getStatusCode();
 
