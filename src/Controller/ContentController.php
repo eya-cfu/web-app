@@ -50,7 +50,7 @@ class ContentController extends AbstractController
     public function hist(){
 
         $client = new \GuzzleHttp\Client();
-        $response = $client->get('https://boulang.ml/commandesBL/getCmdsByEtat?etat=honor%C3%A9e');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/commandesBL/getCmdsByEtat?etat=honor%C3%A9e');
 
         $status =$response->getStatusCode();
 
@@ -81,7 +81,7 @@ class ContentController extends AbstractController
 
 
 
-        $response = $client->get('https://virtserver.swaggerhub.com/Boulangerie/ApiCourse/1.0.0/commandesBL/'.$id.'/detailsCmdBL');
+        $response = $client->get('https://app.167-172-50-144.plesk.page/Boulangerie/ApiCourse/1.0.0/commandesBL/'.$id.'/detailsCmdBL');
 
         $status =$response->getStatusCode();
 
