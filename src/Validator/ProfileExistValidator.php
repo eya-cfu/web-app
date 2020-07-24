@@ -12,7 +12,7 @@ class ProfileExistValidator extends ConstraintValidator
 
         $client = new \GuzzleHttp\Client();
         try{
-            $response = $client->get('https://boulang.ml/profils/'.$value);
+            $response = $client->get('https://app.167-172-50-144.plesk.page/profils/'.$value);
 
             $status =$response->getStatusCode();
 

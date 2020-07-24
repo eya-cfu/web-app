@@ -120,11 +120,13 @@ $('form').submit((event) => {
                 }).done(function(msg){
                     console.log(msg);
                     alert('Envoyé avec success');
-                    location.replace(urlNext);
+                   location.replace(urlNext);
                 })
 
-            }).fail(function () {
-                location.replace(urlNext);
+            }).fail(function (msg) {
+                console.log("i failed");
+                console.log(msg);
+               location.replace(urlNext);
             })
 
 
