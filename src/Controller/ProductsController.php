@@ -47,13 +47,19 @@ class ProductsController extends AbstractController
     public function getProduitByCodeProduit($codeProduit){
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->get('https://app.167-172-50-144.plesk.page/produits/'.$codeProduit);
-        $status =$response->getStatusCode();
+        try{
+            $response = $client->get('https://app.167-172-50-144.plesk.page/produits/'.$codeProduit);
+            $status =$response->getStatusCode();
 
-        $response = $response->getBody()->getContents();
+            $response = $response->getBody()->getContents();
 
-        $Product = (array)(json_decode($response));
-        return $Product;
+            $Product = (array)(json_decode($response));
+            return $Product;
+        }catch(\GuzzleHttp\Exception\RequestException $e){
+            $response = ['libelle' => '500'];
+            return $response;
+        }
+
 
     }
 
@@ -207,11 +213,14 @@ class ProductsController extends AbstractController
                           ];
 
             $theLastOfus = $this->getCount()+1000;
+
             $lastProduct = $this->getProduitByCodeProduit($theLastOfus);
-            if( $lastProduct['libelle'] != $designation )
+            dump($lastProduct);
+            if( ($lastProduct['libelle'] != $designation) || ($lastProduct['libelle'] == '500') )
             {
                 $produitJson=json_encode($produit);
 
+                dump($produitJson);
                 $response = $client->request('POST', 'https://app.167-172-50-144.plesk.page/produits', [
                     'body' => $produitJson
                 ]);
@@ -221,15 +230,17 @@ class ProductsController extends AbstractController
                 if($status >= 201 && $status < 300)
                     return $this->json(['code'=> 200 , 'message'=> 'produit posted', 'composant'=> $produitJson], 200);
                 else
-                    return $this->json(['code'=> 200 , 'message'=> 'produit existe déja'], 400);
+                    return $this->json(['code'=> 200 , 'message'=> 'produit existe déja1'], 400);
 
-             }else
+             }else{
+                $var = "mhere";
+                dump($var);
+                return $this->json(['code'=> 200 , 'message'=> 'produit existe déja2'], 400);
 
-                return $this->json(['code'=> 200 , 'message'=> 'produit existe déja'], 400);
+            }
 
 
-
-    }}
+    }else return $this->json(['code'=> 200 , 'message'=> 'produit existe déja3'], 400);}
 
     /**
      * @Route("/Products", name="products")
@@ -454,7 +465,7 @@ class ProductsController extends AbstractController
         if($form->isSubmitted() and $form->isValid()){
 
             if($this->getCount() != -1)
-            $codeProduit = $this->getCount()+ 1001;
+            $codeProduit = $this->getCount()+ 1000;
   else
       $codeProduit = 0;
 
